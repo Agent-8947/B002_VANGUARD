@@ -1,0 +1,50 @@
+{
+    "creative_name": "NEXUS VANGUARD",
+    "slogan": "Autonomous OSINT Reconnaissance & Intelligence Engine.",
+    "sales_pitch": "V5.0 Golden Standard Hardened Intelligence Pipeline.",
+    "human_story": {
+        "what_it_is": {
+            "en": "A mission-critical OSINT orchestrator that hunts for digital footprints in real-time, delivering clean intelligence dossiers automatically.",
+            "ua": "Автономний OSINT-оркестратор для пошуку цифрових слідів у реальному часі, що автоматично формує досьє.",
+            "ru": "Автономный OSINT-оркестратор для поиска цифровых следов в реальном времени, автоматически формирующий досье."
+        },
+        "who_needs_it": {
+            "en": "Intelligence analysts, legal professionals, and cybersecurity teams requiring rapid, automated external footprinting.",
+            "ua": "Аналітики розвідки, юристи та команди кібербезпеки, яким потрібна швидка автоматизована розвідка.",
+            "ru": "Аналитики разведки, юристы и команды кибербезопасности, которым нужна быстрая автоматизированная разведка."
+        },
+        "how_it_works": {
+            "en": "Orchestrates 6 specialized modules in parallel (Domain, Emails, Usernames, Breaches). Uses k-anonymity for breach checks and html.parser for web structure analysis.",
+            "ua": "Запускає 6 модулів паралельно (Домени, Пошта, Юзернейми, Витоки). Використовує k-anonymity та html.parser для аналізу.",
+            "ru": "Запускает 6 модулей параллельно (Домены, Почта, Юзернеймы, Утечки). Использует k-anonymity и html.parser для анализа."
+        },
+        "what_you_get": {
+            "en": "A hardened, rate-limited JSON intelligence report with scrubbed sensitive data, ready for legal or technical review.",
+            "ua": "Захищений JSON-звіт розвідки з очищеними конфіденційними даними, готовий до юридичного аналізу.",
+            "ru": "Защищенный JSON-отчет разведки с очищенными конфиденциальными данными, готовый к юридическому анализу."
+        }
+    },
+    "what_to_provide": {
+        "title": { "en": "Input vectors", "ua": "Вхідні вектори", "ru": "Входные векторы" },
+        "items": {
+            "en": ["Target Domain (example.com)", "Target Email (user@domain)", "Target Username (johndoe)"],
+            "ua": ["Цільовий домен (example.com)", "Цільова пошта (user@domain)", "Юзернейм (johndoe)"],
+            "ru": ["Целевой домен (example.com)", "Целевая почта (user@domain)", "Юзернейм (johndoe)"]
+        },
+        "note": { "en": "Valid input is critical for intelligence fidelity.", "ua": "Валідні дані критичні для точності розвідки.", "ru": "Валидные данные критичны для точности разведки." }
+    },
+    "deployment": {
+        "where": { "en": "Local execution with parallel thread management.", "ua": "Локальний запуск з паралельними потоками.", "ru": "Локальный запуск с параллельными потоками." },
+        "requirements": ["Python 3.10+", "Requests (optional)", "Internet connectivity"]
+    },
+    "tech_stack": {
+        "label": { "en": "Core open-source inspirations", "ua": "Основні відкриті технології", "ru": "Основные открытые технологии" },
+        "repos": [
+            {"name": "Maigret", "url": "github.com/soxoj/maigret", "desc": "High-fidelity username tracing."},
+            {"name": "theHarvester", "url": "github.com/laramies/theHarvester", "desc": "Subdomain and email discovery."},
+            {"name": "SpiderFoot", "url": "github.com/smicallef/spiderfoot", "desc": "Modular OSINT orchestration logic."},
+            {"name": "Certstream", "url": "github.com/CaliDog/certstream-python", "desc": "Real-time certificate transparency logs."}
+        ]
+    },
+    "agent_source": "MANUAL_FIX_HARDENED_V5"
+}
