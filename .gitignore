@@ -1,0 +1,24 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Logs and Reports
+logs/
+report_*.json
+recon_*.json
+
+# Artifacts
+landing/
+b002-vanguard/

@@ -1,8 +1,10 @@
-#!/usr/bin/env python3
-"""NEXUS Module: breach_intel  Breach detection via HIBP k-anonymity API."""
-import hashlib, urllib.request, urllib.parse, os, json
+import hashlib, urllib.request, urllib.parse, os, json, time
 
 def check_password(password: str) -> dict:
+    if not password or not isinstance(password, str):
+        return {"error": "Invalid password input (must be non-empty string)"}
+    # Rate Limiting Guard
+    time.sleep(0.5)
     sha1 = hashlib.sha1(password.encode()).hexdigest().upper()
     prefix, suffix = sha1[:5], sha1[5:]
     req = urllib.request.Request(f"https://api.pwnedpasswords.com/range/{prefix}",
@@ -18,6 +20,10 @@ def check_password(password: str) -> dict:
         return {"error": str(e)}
 
 def check_email(email: str) -> dict:
+    if not email or "@" not in email:
+        return {"error": "Invalid email format"}
+    # Rate Limiting Guard
+    time.sleep(1.5)
     key = os.environ.get("HIBP_API_KEY", "")
     if not key:
         return {"error": "Set HIBP_API_KEY env var (free at haveibeenpwned.com/API/Key)", "email": email}
