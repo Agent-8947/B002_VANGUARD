@@ -14,20 +14,36 @@ PLATFORMS = {
     "ProductHunt": "https://www.producthunt.com/@{}","Mastodon": "https://mastodon.social/@{}",
 }
 
+# Advanced matching rules for specific platforms to avoid false 200 OK
+PLATFORM_RULES = {
+    "LinkedIn": "linkedin.com/authwall",
+    "Instagram": "instagram.com/accounts/login",
+    "TikTok": "tiktok.com/@", # Should contain the @username if found
+    "Twitter": "twitter.com/search",
+}
+
 def _check(platform, url_tpl, username, timeout=5.0):
     url = url_tpl.format(username)
     try:
-        req = urllib.request.Request(url, method="GET", headers={"User-Agent": "nexus-social/1.0"})
+        req = urllib.request.Request(url, method="GET", headers={
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+        })
         with urllib.request.urlopen(req, timeout=timeout) as r:
             res_url = r.geturl().lower()
-            # Most sites redirect to a login/not-found page if user is missing
-            if "/login" in res_url or "/notfound" in res_url:
+            status = r.status
+            
+            # 1. Check generic "Not Found" patterns in URL
+            if any(p in res_url for p in ["/login", "/notfound", "/404", "error"]):
                 found = False
+            # 2. Platform-specific AuthWall/Redirect checks
+            elif platform in PLATFORM_RULES and PLATFORM_RULES[platform] in res_url:
+                # If LinkedIn is redirecting to an authwall, the user presence is inconclusive (usually False)
+                found = False if platform == "LinkedIn" else True
             else:
-                found = r.status < 400
-    except urllib.error.HTTPError as e: 
-        found = e.code < 400
-    except: 
+                found = status < 400
+    except urllib.error.HTTPError as e:
+        found = e.code < 400 and e.code != 404
+    except:
         found = False
     return {"platform": platform, "url": url, "found": found}
 
