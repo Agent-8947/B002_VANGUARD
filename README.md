@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="logo.png" width="250" alt="Vanguard Logo">
+
 # Vanguard
 
 **Autonomous Intelligence Pipeline**
