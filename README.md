@@ -1,6 +1,5 @@
 <div align="center">
-
-<img src="logo.png" width="250" alt="Vanguard Logo">
+<img src="logo.png" width="300" alt="Vanguard Logo">
 
 # Vanguard
 
