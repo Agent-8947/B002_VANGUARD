@@ -22,6 +22,14 @@ Vanguard is an autonomous multi-layer intelligence pipeline built by the **NEXUS
 
 | Module | Description |
 |--------|-------------|
+| `breach_intel` | NEXUS Module: breach_intel  Breach detection via HIBP k-anonymity API. import ha... |
+| `domain_intel` | NEXUS Module: domain_intel — Passive OSINT via Python stdlib DNS & SSL.  import ... |
+| `endpoint_monitor` | NEXUS Module: endpoint_monitor  HTTP endpoint monitor with concurrent probing. i... |
+| `identity_profiler` | NEXUS Module: identity_profiler  Username presence across 15 platforms. import u... |
+| `network_recon` | NEXUS Module: network_recon  Subdomain discovery via crt.sh CT logs.  import jso... |
+| `security_analyzer` | NEXUS Module: security_analyzer Passive OSINT analyzer  IP resolution, HTTPS che... |
+| `shadow_cli` | NEXUS SHADOW SIGHT  Ultimate OSINT Engine Dynamically loads and coordinates all ... |
+| `web_crawler` | NEXUS Module: web_crawler  Basic Web Crawler (Extracts Title & Links). import ur... |
 
 ## Quick Start
 
