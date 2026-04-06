@@ -32,7 +32,13 @@ def check_email(email: str) -> dict:
 
 def run(target: str) -> dict:
     if not target: return {"error": "empty target"}
-    return check_email(target) if "@" in target else check_password(target)
+    if "@" in target:
+        return check_email(target)
+    else:
+        res = check_password(target)
+        # Security Guard: Never log the actual password
+        res["target"] = "[SCRUBBED_SENSITIVE_DATA]"
+        return res
 
 if __name__ == "__main__":
     import sys

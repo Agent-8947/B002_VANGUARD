@@ -17,11 +17,18 @@ PLATFORMS = {
 def _check(platform, url_tpl, username, timeout=5.0):
     url = url_tpl.format(username)
     try:
-        req = urllib.request.Request(url, method="HEAD", headers={"User-Agent": "nexus-social/1.0"})
+        req = urllib.request.Request(url, method="GET", headers={"User-Agent": "nexus-social/1.0"})
         with urllib.request.urlopen(req, timeout=timeout) as r:
-            found = r.status < 400
-    except urllib.error.HTTPError as e: found = e.code < 400
-    except: found = False
+            res_url = r.geturl().lower()
+            # Most sites redirect to a login/not-found page if user is missing
+            if "/login" in res_url or "/notfound" in res_url:
+                found = False
+            else:
+                found = r.status < 400
+    except urllib.error.HTTPError as e: 
+        found = e.code < 400
+    except: 
+        found = False
     return {"platform": platform, "url": url, "found": found}
 
 def run(username: str) -> dict:

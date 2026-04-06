@@ -1,0 +1,3 @@
+requests
+# stdlib only for most modules, but some may use optional headers logic
+# hibp check uses stdlib urllib, so technically no hard dependencies

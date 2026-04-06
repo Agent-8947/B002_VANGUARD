@@ -33,13 +33,16 @@ class ShadowSightCLI:
                 
                 if hasattr(mod, "run"):
                     doc = mod.__doc__ or "No description provided."
-                    title = doc.split("")[-1].strip() if "" in doc else mod_name.replace("_", " ").title()
+                    # Get the first meaningful line of the docstring
+                    doc_lines = [line.strip() for line in doc.split("\n") if line.strip()]
+                    title = doc_lines[0] if doc_lines else mod_name.replace("_", " ").title()
+                    
                     self.modules[mod_name] = {
                         "module": mod,
                         "title": title
                     }
             except Exception as e:
-                pass
+                print(f"  [!] Failed to load plugin '{mod_name}': {e}")
 
     def banner(self):
         print("\n" + "=" * 60)
@@ -68,14 +71,19 @@ class ShadowSightCLI:
                 print(f"    [!] Error during execution: {e}")
                 results[name] = {"error": str(e)}
                 
-        logs_dir = self.src_dir.parent / "logs"
-        logs_dir.mkdir(exist_ok=True)
-        report_path = logs_dir / f"report_{target.replace('.', '_')}_{int(datetime.now().timestamp())}.json"
-        report_path.write_text(json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8")
-        
-        print("\n" + "=" * 60)
-        print(f"[*] RECON COMPLETE. Full report saved to: {report_path.name}")
-        print("=" * 60 + "\n")
+        try:
+            logs_dir = self.src_dir.parent / "logs"
+            logs_dir.mkdir(exist_ok=True, parents=True)
+            report_path = logs_dir / f"report_{target.replace('.', '_')}_{int(datetime.now().timestamp())}.json"
+            report_path.write_text(json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8")
+            
+            print("\n" + "=" * 60)
+            print(f"[*] RECON COMPLETE. Full report saved to: {report_path.name}")
+            print("=" * 60 + "\n")
+        except Exception as e:
+            print("\n" + "=" * 60)
+            print(f"[!] RECON COMPLETE, but failed to save report: {e}")
+            print("=" * 60 + "\n")
 
 if __name__ == "__main__":
     cli = ShadowSightCLI()

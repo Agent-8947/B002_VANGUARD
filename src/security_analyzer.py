@@ -37,9 +37,9 @@ SECURITY_HEADERS = {
 def run(target: str) -> dict:
     if not target: return {"error": "empty target"}
     target = target.replace("https://", "").replace("http://", "").split("/")[0].split("@")[-1]
-    headers = _http_headers(target)
+    headers = {k.lower(): v for k, v in _http_headers(target).items()}
     if not headers: return {"error": "Network unreachable or host offline", "target": target}
-    sec = {label: (header in headers) for header, label in SECURITY_HEADERS.items()}
+    sec = {label: (header.lower() in headers) for header, label in SECURITY_HEADERS.items()}
     return {
         "target": target, "module": "security_analyzer",
         "timestamp": datetime.now(timezone.utc).isoformat(),

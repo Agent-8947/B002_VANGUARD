@@ -380,8 +380,3 @@ def run(domain: str) -> dict:
 
 if __name__ == "__main__":
     main()
-
-def run(domain: str) -> dict:
-    if not domain: return {"error": "empty target"}
-    domain = domain.replace("https://", "").replace("http://", "").split("/")[0].split("@")[-1]
-    return bulk_check([domain], ["ssl", "whois", "dns", "subdomains"])
